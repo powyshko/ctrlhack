@@ -116,14 +116,13 @@ export default {
         const isQty = this.firstFieldChangeName === FIELDS_NAME.qty;
         const isAmount = fieldName === FIELDS_NAME.amount;
 
-        if (isPrice || isQty) {
-          this.form.amount = price * qty;
-        }
-
         if (isAmount) {
           if (isPrice) {
             this.form.price = amount / qty
-          } else if (price) {
+          } else if (price && isQty) {
+            this.form.qty = amount / price
+          } else if (price && qty) {
+            this.form.price = amount / qty
             this.form.qty = amount / price
           }
 
